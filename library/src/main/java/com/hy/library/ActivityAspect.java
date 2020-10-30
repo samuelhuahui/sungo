@@ -12,7 +12,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
 public class ActivityAspect {
-    private static final String TAG = "ActivityAspect";
+    private static final String TAG = "Sungo";
 
 
     @Pointcut("execution( * androidx.appcompat.app.AppCompatActivity.setContentView(..))")

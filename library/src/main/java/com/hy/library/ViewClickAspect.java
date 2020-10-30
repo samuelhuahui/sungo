@@ -24,7 +24,7 @@ import org.aspectj.lang.annotation.Pointcut;
  */
 @Aspect
 public class ViewClickAspect {
-    private static final String TAG = "ViewClickAspect";
+    private static final String TAG = "Sungo";
 
     @Pointcut("execution(* android.view.View.OnClickListener.onClick(..))")
     public void clickPointcut() {
@@ -36,10 +36,12 @@ public class ViewClickAspect {
         if (args != null && args.length > 0 && args[0] instanceof View) {
             View view = (View) args[0];
             int id = view.getId();
-            String typeName = view.getContext().getResources().getResourceTypeName(id);
-            String entryName = view.getContext().getResources().getResourceEntryName(id);
-            Log.d(TAG, joinPoint.getSignature().toString());
-            Log.d(TAG, typeName + "/" + entryName);
+            if (id > 0) {
+                String typeName = view.getContext().getResources().getResourceTypeName(id);
+                String entryName = view.getContext().getResources().getResourceEntryName(id);
+                Log.d(TAG, joinPoint.getSignature().toString());
+                Log.d(TAG, typeName + "/" + entryName);
+            }
         }
         joinPoint.proceed();
     }
