@@ -41,6 +41,8 @@ public class ViewClickAspect {
                 String entryName = view.getContext().getResources().getResourceEntryName(id);
                 Log.d(TAG, joinPoint.getSignature().toString());
                 Log.d(TAG, typeName + "/" + entryName);
+            } else {
+                Log.d(TAG, view.toString());
             }
         }
         joinPoint.proceed();
