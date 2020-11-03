@@ -8,11 +8,15 @@ package com.hy.library;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
 /**
@@ -30,8 +34,9 @@ public class ViewClickAspect {
     public void clickPointcut() {
     }
 
-    @Around("clickPointcut()")
-    public void onClick(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Before("clickPointcut()")
+    public void onClick(JoinPoint joinPoint) throws Throwable {
+        Log.d(TAG, "===========sungo  start===========");
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length > 0 && args[0] instanceof View) {
             View view = (View) args[0];
@@ -42,9 +47,14 @@ public class ViewClickAspect {
                 Log.d(TAG, joinPoint.getSignature().toString());
                 Log.d(TAG, typeName + "/" + entryName);
             } else {
-                Log.d(TAG, view.toString());
+                Log.d(TAG, joinPoint.getSignature().toString());
+            }
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                String text = textView.getText().toString();
+                Log.d(TAG, "text : " + text);
             }
         }
-        joinPoint.proceed();
+        Log.d(TAG, "===========sungo  end===========");
     }
 }

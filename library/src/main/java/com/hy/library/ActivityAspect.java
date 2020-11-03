@@ -21,6 +21,7 @@ public class ActivityAspect {
 
     @Before("setContentViewPointcut()")
     public void setContentView(JoinPoint joinPoint) throws Throwable {
+        Log.d(TAG, "===========sungo  start===========");
         Object[] args = joinPoint.getArgs();
         if (args != null && args.length > 0 && args[0] instanceof Integer) {
             int layoutId = (int) args[0];
@@ -28,8 +29,9 @@ public class ActivityAspect {
             String typeName = context.getResources().getResourceTypeName(layoutId);
             String entryName = context.getResources().getResourceEntryName(layoutId);
             Log.d(TAG, context.getClass().getName());
-            Log.d(TAG, typeName + "/" + entryName);
+            Log.d(TAG, typeName + "/" + entryName + ".xml");
         }
+        Log.d(TAG, "===========sungo  end===========");
     }
 
 }
